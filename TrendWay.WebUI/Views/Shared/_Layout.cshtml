@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>Trendway | Alışverişin Yeni Adresi</title>
+    <meta charset="UTF-8">
+    <meta name="description" content=" Trendway | Alışverişin Yeni Adresi">
+    <meta name="keywords" content="trendway, eCommerce, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/Content/img/favicon.ico" rel="shortcut icon" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="/Content/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/Content/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/Content/css/flaticon.css" />
+    <link rel="stylesheet" href="/Content/css/slicknav.min.css" />
+    <link rel="stylesheet" href="/Content/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/Content/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/Content/css/animate.css" />
+    <link rel="stylesheet" href="/Content/css/style.css" />
+    <link href="/Content/css/main.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    @{Html.RenderAction("Header", "Home");}
+    
+    @RenderBody()
+    <section class="footer-section">
+        <div class="container">
+            <div class="footer-logo text-center">
+                <a href="index.html"><img src="/Content/img/logo_trendway.jpg" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widget about-widget">
+                        <h2>HAKKIMIZDA</h2>
+                        <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
+                        <img src="/Content/img/cards.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widget about-widget">
+                        <h2>HIZLI ERİŞİM</h2>
+                        <ul>
+                            <li><a href="">About Us</a></li>
+                            <li><a href="">Track Orders</a></li>
+                            <li><a href="">Returns</a></li>
+                            <li><a href="">Jobs</a></li>
+                            <li><a href="">Shipping</a></li>
+                            <li><a href="">Blog</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="">Partners</a></li>
+                            <li><a href="">Bloggers</a></li>
+                            <li><a href="">Support</a></li>
+                            <li><a href="">Terms of Use</a></li>
+                            <li><a href="">Press</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widget about-widget">
+                        <h2>SIKÇA SORULAN SORULAR</h2>
+                        <div class="fw-latest-post-widget">
+                            <div class="lp-item">
+                                <div class="lp-thumb set-bg" data-setbg="/Content/img/blog-thumbs/1.jpg"></div>
+                                <div class="lp-content">
+                                    <h6>what shoes to wear</h6>
+                                    <span>Oct 21, 2018</span>
+                                    <a href="#" class="readmore">Read More</a>
+                                </div>
+                            </div>
+                            <div class="lp-item">
+                                <div class="lp-thumb set-bg" data-setbg="/Content/img/blog-thumbs/2.jpg"></div>
+                                <div class="lp-content">
+                                    <h6>trends this year</h6>
+                                    <span>Oct 21, 2018</span>
+                                    <a href="#" class="readmore">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widget contact-widget">
+                        <h2>BİZE ULAŞIN</h2>
+                        <div class="con-info">
+                            <span>C.</span>
+                            <p>Your Company Ltd </p>
+                        </div>
+                        <div class="con-info">
+                            <span>B.</span>
+                            <p>1481 Creekside Lane  Avila Beach, CA 93424, P.O. BOX 68 </p>
+                        </div>
+                        <div class="con-info">
+                            <span>T.</span>
+                            <p>+53 345 7953 32453</p>
+                        </div>
+                        <div class="con-info">
+                            <span>E.</span>
+                            <p>office@youremail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-links-warp">
+            <div class="container">
+                <div class="social-links">
+                    <a href="" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
+                    <a href="" class="pinterest"><i class="fab fa-pinterest"></i><span>pinterest</span></a>
+                    <a href="" class="facebook"><i class="fab fa-facebook"></i><span>facebook</span></a>
+                    <a href="" class="twitter"><i class="fab fa-twitter"></i><span>twitter</span></a>
+                    <a href="" class="youtube"><i class="fab fa-youtube"></i><span>youtube</span></a>
+                </div>
+
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                <p class="text-white text-center mt-5">
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                </p>
+
+
+            </div>
+        </div>
+    </section>
+
+    <script src="/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="/Content/js/bootstrap.min.js"></script>
+    <script src="/Content/js/jquery.slicknav.min.js"></script>
+    <script src="/Content/js/owl.carousel.min.js"></script>
+    <script src="/Content/js/jquery.nicescroll.min.js"></script>
+    <script src="/Content/js/jquery.zoom.min.js"></script>
+    <script src="/Content/js/jquery-ui.min.js"></script>
+    <script src="/Content/js/main.js"></script>
+    <script src="/Content/js/site.js"></script>
+</body>
+</html>

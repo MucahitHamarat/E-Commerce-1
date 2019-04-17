@@ -1,0 +1,90 @@
+﻿@using TrendWay.BOL.Entities
+@using TrendWay.WebUI.Helpers
+@model IEnumerable<Category>
+<header class="header-section">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 text-center text-lg-left">
+                    <!-- logo -->
+                    <a href="/" class="site-logo">
+                        <img src="/Content/img/logo_trendway.jpg" alt="">
+                    </a>
+                </div>
+                <div class="col-xl-6 col-lg-5">
+                    <form class="header-search-form">
+                        <input type="text" placeholder="Trendway'da ne aramıştınız...">
+                        <button><i class="flaticon-search"></i></button>
+                    </form>
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="user-panel">
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @Session["AdSoyad"]
+                                <ul class="cikisPaneli">
+                                    <li><a>Üyelik Bilgilerim</a></li>
+                                    <li><a>Hesabım</a></li>
+                                    <li><a href="@Url.Action("Logout","Member")">Çıkış</a></li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <a href="/Member/Index">@dil.Header.girisyap</a>
+                                <span>
+                                    veya<a href="/Member/Index?t=yeni">@dil.Header.yeniuyelik</a>
+                                </span>
+                            }
+
+                        </div> 
+                        <div style="position:absolute;top:-18px;font-size:13px">
+                        <a href="@Url.Action("DilDegistir","Home",new { dil="tr",returnURL=Request.RawUrl})" style="color:#444">Türkçe</a>|
+                        <a href="@Url.Action("DilDegistir","Home",new { dil="en",returnURL=Request.RawUrl})" style="color:#444">English</a>
+                        </div>
+                        <div class="up-item">
+
+                            <div class="shopping-card">
+                                <i class="flaticon-bag"></i>
+                                <span class="productCount">@CartHelper.CartCount()</span>
+                            </div>
+                            <a href="@Url.Action("Index","Cart")">@dil.Header.alisverissepetim</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="main-navbar">
+        <div class="container">
+            <!-- menu -->
+            <ul class="main-menu">
+                <li><a href="#">Home</a></li>
+                @foreach (Category hbk in Model.Where(w => w.ParentID == null))
+                {
+                    <li>
+                        <a href="@Url.Action("Filter","Category",new { ParentID=hbk.ID})">
+                            @hbk.Name@{
+                                if (hbk.IsNew == true)
+                                {<span class="new">New</span>}
+                            }
+                        </a>
+                        @if (hbk.Children.Any())
+                        {
+                            <ul class="sub-menu">
+                                @foreach (Category hbak in hbk.Children)
+                                {
+                                    <li><a href="@Url.Action("Filter","Category",new { CatID=hbak.ID})">@hbak.Name</a></li>
+                                }
+                            </ul>
+                        }
+
+                    </li>
+
+                }
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>

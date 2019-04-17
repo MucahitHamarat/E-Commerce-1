@@ -1,0 +1,97 @@
+﻿@using TrendWay.WebUI.ViewModels
+@using TrendWay.BOL.Entities
+@model CategoryVM 
+<div class="page-top-info">
+    <div class="container">
+        <h4>KATEGORİ SAYFASI</h4>
+        <div class="site-pagination">
+            <a href="/">Ana Sayfa</a> /
+            <a href="">Kategoriler</a> /
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+<!-- Category section -->
+<section class="category-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-2 order-lg-1">
+                <div class="filter-widget">
+                    <h2 class="fw-title">Kategoriler</h2>
+                  
+                    <ul class="category-menu">
+                        @foreach (Category hbc in Model.Categories.Where(w=>w.ParentID==null))
+                        {
+                        <li>
+                            <a href="@Url.Action("Filter","Category",new { ParentID=hbc.ID})">@hbc.Name</a>
+                            @if (hbc.Children.Any())
+                            {
+                                <ul class="sub-menu">
+                                    @foreach (Category hbac in hbc.Children)
+                                    {
+                                        <li><a href="@Url.Action("Filter","Category",new { CatID=hbac.ID})">@hbac.Name <span>(@hbac.Products.Count())</span></a></li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                        }
+                    </ul>
+                </div>
+                <div class="filter-widget mb-0">
+                    <h2 class="fw-title">refine by</h2>
+                    <div class="price-range-wrap">
+                        <h4>Price</h4>
+                        <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="270">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;"></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;">
+                            </span>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;">
+                            </span>
+                        </div>
+                        <div class="range-slider">
+                            <div class="price-input">
+                                <input type="text" id="minamount">
+                                <input type="text" id="maxamount">
+
+                            </div>
+                            <span style="width:100px;height:30px;display:block;background-color:#444;color:#fff;text-align:center;font-size:14px;padding-top:6px;position:absolute;z-index:100;margin-left:60px;cursor:pointer" onmouseover="$(this).css('background-color','#f51167')" onmouseout="$(this).css('background-color','#444')" onclick="location.href='/Category/Filter?Price='+$('#minamount').val()+'_'+$('#maxamount').val()">FİLTRELE</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-widget">
+                    <h2 class="fw-title">Brand</h2>
+                    <ul class="category-menu">
+                        @foreach (Brand hbb in Model.Brands)
+                        {
+                            <li><a href="@Url.Action("Filter","Category",new { BrandID=hbb.ID})">@hbb.Name<span>(@hbb.Products.Count())</span></a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
+                <div class="row">
+                    @foreach (Product hbu in Model.Products)
+                    {
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    <div class="tag-sale">ON SALE</div>
+                                    <img src="@hbu.Pictures.FirstOrDefault(f=>f.PIndex==1).FPath" alt="@hbu.Name">
+                                    <div class="pi-links">
+                                        <a onclick="functAddCart(@hbu.ID,1)" class="add-card" style="cursor:pointer"><i class="flaticon-bag"></i><span>SEPETE EKLE</span></a>
+                                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="pi-text">
+                                    <h6>@hbu.Price TL</h6>
+                                    <a href="@Url.Action("Detail","Product",new {ID=hbu.ID })"><p>@hbu.Name</p></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

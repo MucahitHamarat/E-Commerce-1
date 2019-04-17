@@ -1,0 +1,61 @@
+﻿@using TrendWay.WebUI.ViewModels
+@using TrendWay.BOL.Entities
+@model CartVM
+
+<!-- Page info -->
+<div class="page-top-info">
+    <div class="container">
+        <h4>Your cart</h4>
+        <div class="site-pagination">
+            <a href="">Home</a> /
+            <a href="">Your cart</a>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+<!-- checkout section  -->
+<section class="checkout-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 order-2 order-lg-1">
+                <form class="checkout-form">
+                    <div class="cf-title">Billing Address</div>
+                    <div class="row">
+                        @Html.DropDownList("checkoutAddress", new SelectList(Model.Addresses, "ID", "Name"), "Yeni Bir Adres Belirtmek İstiyorum", new { onchange = "functcheckoutAddress(this)", @class = "checkoutAddress" })
+                    </div>
+                    <div class="row address-inputs">
+                        <div class="col-md-12">
+                            <input type="text" placeholder="Adres Adı" name="Name" class="Name">
+                            <input type="text" placeholder="Address" name="Address" class="Address">
+                            <input type="text" placeholder="Şehir" name="City" class="City">
+                            <input type="text" placeholder="İlçe" name="District" class="District">
+
+                        </div>
+                    </div>
+                    <button class="site-btn submit-order-btn">Place Order</button>
+                </form>
+            </div>
+            <div class="col-lg-4 order-1 order-lg-2">
+                <div class="checkout-cart">
+                    <h3>SEPETİNİZ</h3>
+                    <ul class="product-list">
+                        @foreach (CartDetail hbcd in Model.CartDetails)
+                        {
+                            <li>
+                                <div class="pl-thumb"><img src="@hbcd.FPath" alt=""></div>
+                                <h6>@hbcd.ProductName</h6>
+                                <p>@hbcd.Price TL</p>
+                            </li>
+                        }
+                    </ul>
+                    <ul class="price-list">
+                        <li>Toplam<span>@Model.CartDetails.Sum(s => s.Price * s.Quantity) TL</span></li>
+                        <li>Shipping<span>free</span></li>
+                        <li class="total">Toplam<span>@Model.CartDetails.Sum(s => s.Price * s.Quantity) TL</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- checkout section end -->

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TrendWay.BOL.Entities.Product>
+
+@{
+    ViewBag.sayfaBaslik = "Ürün Yönetimi";
+    ViewBag.tabloBaslik = "Ürünlar";
+}
+<p>
+    @Html.ActionLink("Yeni Kayıt", "Create",null,new { @class= "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+     
+        <th>
+            @Html.DisplayNameFor(model => model.Detail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PIndex)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.Raw(item.Detail)
+        </td>
+     
+        <td>
+            @Html.DisplayFor(modelItem => item.Price) TL
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PIndex) 
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.ID })<br />
+            @Html.ActionLink("Detaylar", "Details", new { id=item.ID }) <br />
+            @Html.ActionLink("Sil", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

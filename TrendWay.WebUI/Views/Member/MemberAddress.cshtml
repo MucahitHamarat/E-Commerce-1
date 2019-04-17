@@ -1,0 +1,51 @@
+﻿@using TrendWay.BOL.Entities
+<div class="page-top-info">
+    <div class="container">
+        <h4>ÜYELİK BİLGİLERİM</h4>
+        <div class="site-pagination">
+            <a href="/">Ana Sayfa</a> /
+            <a href="">Adreslerim</a>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+<!-- checkout section  -->
+<section class="checkout-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 order-2 order-lg-1">
+
+                @using (Html.BeginForm("MemberAddress", "Member", FormMethod.Post, new { @class = "checkout-form" }))
+                {
+                    <div class="cf-title">Adreslerim</div>
+                    <div class="row address-inputs">
+
+                        <div class="col-md-12">
+                            <input type="text" placeholder="Adres Adı" name="Name">
+                            <input type="text" placeholder="Adres" name="MemberAddress">
+                            <input type="text" placeholder="Şehir" name="City">
+                            <input type="text" placeholder="İlçe" name="District">
+                            <input type="hidden" name="MemberID" value="@Session["MemberID"].ToString()" />
+                        </div>
+                        <input type="submit" class="site-btn submit-order-btn" value="Yeni Adres Ekle" />
+
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4 order-1 order-lg-2">
+                <div class="checkout-cart">
+                    <h3>Kayıtlı Adreslerim</h3>
+                    <ul class="product-list">
+                        @if (ViewBag.Address != null)
+                        {
+                            foreach (Address hba in ViewBag.Address)
+                            {
+                                <li><a href="@Url.Action("AddressUpdate", "Member", new { ID = hba.ID })">@hba.Name</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

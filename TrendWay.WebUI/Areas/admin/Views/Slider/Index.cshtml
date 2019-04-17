@@ -1,0 +1,62 @@
+﻿@model IEnumerable<TrendWay.BOL.Entities.Slider>
+
+@{
+    ViewBag.sayfaBaslik = "Slayt Yönetimi";
+    ViewBag.tabloBaslik = "Slaytlar";
+}
+<p>
+    @Html.ActionLink("Yeni Kayıt", "Create",null,new { @class= "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PIndex)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="@item.Picture" style="height:50px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+     
+        <td>
+            @Html.DisplayFor(modelItem => item.Price) TL
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PIndex) 
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.ID })<br />
+            @Html.ActionLink("Detaylar", "Details", new { id=item.ID }) <br />
+            @Html.ActionLink("Sil", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

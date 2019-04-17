@@ -1,0 +1,132 @@
+﻿@using TrendWay.WebUI.ViewModels
+@using TrendWay.BOL.Entities
+@model IndexVM
+<section class="hero-section">
+    <div class="hero-slider owl-carousel">
+        @foreach (Slider hbs in Model.Sliders)
+        {
+            <div class="hs-item set-bg" data-setbg="@hbs.Picture">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-7 text-white">
+                            <span>@hbs.Title</span>
+                            @*<h2>@hbs.SubTitle.Substring(0, 11)</h2>*@
+                            <h2>@(hbs.SubTitle.Length > 11 ? hbs.SubTitle.Substring(0, 11) : hbs.SubTitle)</h2>
+                            <p>@hbs.Description</p>
+                            <a href="@hbs.CategoryLink" class="site-btn sb-line">KEŞFET</a>
+                            <a href="@hbs.ProductLink" class="site-btn sb-white">SEPETE EKLE</a>
+                        </div>
+                    </div>
+                    <div class="offer-card text-white">
+                        <span>from</span>
+                        <h2>@hbs.Price.ToString("#,#0")</h2>
+                        <p>ŞİMDİ AL</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="container">
+        <div class="slide-num-holder" id="snh-1"></div>
+    </div>
+</section>
+<!-- Hero section end -->
+<!-- Features section -->
+<section class="features-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 p-0 feature">
+                <div class="feature-inner">
+                    <div class="feature-icon">
+                        <img src="/Content/img/icons/1.png" alt="#">
+                    </div>
+                    <h2>Hızlı Ödeme Seçenekleri</h2>
+                </div>
+            </div>
+            <div class="col-md-4 p-0 feature">
+                <div class="feature-inner">
+                    <div class="feature-icon">
+                        <img src="/Content/img/icons/2.png" alt="#">
+                    </div>
+                    <h2>En Şık Ürünler</h2>
+                </div>
+            </div>
+            <div class="col-md-4 p-0 feature">
+                <div class="feature-inner">
+                    <div class="feature-icon">
+                        <img src="/Content/img/icons/3.png" alt="#">
+                    </div>
+                    <h2>Ücretsiz ve Hızlı Kargo</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Features section end -->
+<!-- letest product section -->
+<section class="top-letest-product-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>EN YENİ ÜRÜNLER</h2>
+        </div>
+        <div class="product-slider owl-carousel">
+            @foreach (Product product in Model.NewestProducts)
+            {
+                <div class="product-item">
+                    <div class="pi-pic">
+                        <img src="@product.Pictures.FirstOrDefault(f=>f.PIndex==1).FPath" alt="@product.Name">
+                        <div class="pi-links">
+                            <a onclick="functAddCart(@product.ID,1)" class="add-card" style="cursor:pointer"><i class="flaticon-bag"></i><span>SEPETE EKLE</span></a>
+                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="pi-text">
+                        <h6>@product.Price TL</h6>
+                        <a href="@Url.Action("Detail","Product",new {ID=product.ID })"><p>@product.Name</p></a>
+</div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section class="banner-section">
+    <div class="container">
+        <img src="@Model.Advertisements.FirstOrDefault(f=>f.PIndex==1).FPath" alt="@Model.Advertisements.FirstOrDefault(f=>f.PIndex==1).Name" />
+    </div>
+</section>
+<section class="product-filter-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>EN ÇOK SATILAN ÜRÜNLER</h2>
+        </div>
+        <div class="row">
+            @foreach (Product product in Model.BestSellerProducts)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <img src="@product.Pictures.FirstOrDefault(f=>f.PIndex==1).FPath" alt="@product.Name">
+                            <div class="pi-links">
+                                <a onclick="functAddCart(@product.ID,1)" class="add-card" style="cursor:pointer"><i class="flaticon-bag"></i><span>SEPETE EKLE</span></a>
+                                <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                            </div>
+                        </div>
+                        <div class="pi-text">
+                            <h6>@product.Price TL</h6>
+                            <a href="@Url.Action("Detail","Product",new {ID=product.ID })"><p>@product.Name</p></a>
+</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Product filter section end -->
+<!-- Banner section -->
+<section class="banner-section">
+    <div class="container">
+       <img src="@Model.Advertisements.FirstOrDefault(f=>f.PIndex==2).FPath" alt="@Model.Advertisements.FirstOrDefault(f=>f.PIndex==2).Name" />
+    </div>
+</section>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14312.842097022174!2d28.998955786435108!3d41.04921959572996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab708ea0e8ced%3A0x3e2dfa2a7d2db401!2s%C3%96zel+Amerikan+Hastanesi!5e0!3m2!1str!2str!4v1552304314957/4106" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>

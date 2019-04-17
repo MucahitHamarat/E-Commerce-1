@@ -1,0 +1,98 @@
+﻿@using TrendWay.WebUI.ViewModels
+@using TrendWay.BOL.Entities
+@model CartVM
+<div class="page-top-info">
+    <div class="container">
+        <h4>ALIŞVERİŞ SEPETİM</h4>
+        <div class="site-pagination">
+            <a href="/">Home</a>/
+            <a>Sepetim</a>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+<!-- cart section end -->
+<section class="cart-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-table">
+                    <h3>ALIŞVERİŞ SEPETİM</h3>
+                    <div class="cart-table-warp">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-th">Ürün Adı</th>
+                                    <th class="quy-th">Miktar</th>
+                                    <th class="total-th">Fiyat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (CartDetail hbcd in Model.CartDetails)
+                                {
+                                    <tr>
+                                        <td class="product-col">
+                                            <img src="@hbcd.FPath" alt="">
+                                            <div class="pc-title">
+                                                <h4>@hbcd.ProductName</h4>
+                                                <p>@hbcd.Price TL</p>
+                                            </div>
+                                        </td>
+                                        <td class="quy-col">
+                                            <div class="quantity">
+                                                <div class="pro-qty">
+                                                    <span class="dec qtybtn" onclick="updateCart(@hbcd.ProductID,@hbcd.Quantity,this,-1)">-</span>
+                                                    <input class="cartDetailValue" type="text" value="@hbcd.Quantity">
+                                                    <span class="inc qtybtn" onclick="updateCart(@hbcd.ProductID,@hbcd.Quantity,this,1)">+</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="total-col"><h4>@(hbcd.Quantity*hbcd.Price) TL</h4><i class="fas fa-trash-alt" style="color:#f51167;margin-top:3px;cursor:pointer" onclick="deleteCart(@hbcd.ProductID)"></i></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="total-cost">
+                        <h6>Toplam<span>@Model.CartDetails.Sum(s=>s.Price*s.Quantity) TL</span></h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 card-right">
+                <a href="@Url.Action("Index","Checkout")" class="site-btn">Alışverişi Tamamla</a>
+                <a href="/" class="site-btn sb-dark">Alışverişe Devam Et</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- cart section end -->
+<!-- Related product section -->
+<section class="related-product-section">
+    <div class="container">
+        <div class="section-title text-uppercase">
+            <h2>ALIŞVERİŞE DEVAM EDİN</h2>
+        </div>
+        <div class="row">
+            @foreach (Product hbp in Model.BestSellerProducts)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <div class="tag-new">New</div>
+                            <img src="@hbp.Pictures.FirstOrDefault(f=>f.PIndex==1).FPath" alt="">
+                            <div class="pi-links">
+                                <a onclick="functAddCart(@hbp.ID,1)" class="add-card" style="cursor:pointer"><i class="flaticon-bag"></i><span>SEPETE EKLE</span></a>
+                                <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                            </div>
+                        </div>
+                        <div class="pi-text">
+                            <h6>@hbp.Price TL</h6>
+                            <a href="@Url.Action("Detail","Product",new {ID=hbp.ID })"><p>@hbp.Name</p></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Related product section end -->
